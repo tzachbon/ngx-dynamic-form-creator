@@ -1,38 +1,36 @@
-<!--
-<form [formGroup]="form">
-<mat-vertical-stepper>
-  <mat-step *ngFor="let step of getFormStepNamesArray()" [label]="step">
-    {{step}}
-  </mat-step>
-
-</mat-vertical-stepper>
-</form> -->
 <form [formGroup]="form" (ngSubmit)="onSubmitHandler()">
-  <mat-horizontal-stepper labelPosition="bottom" #stepper>
-    <mat-step *ngFor="let step of getFormStepNamesArray(); let i = index">
+  <mat-horizontal-stepper
+    [linear]="true"
+    labelPosition="bottom"
+    #stepper
+    (selectionChange)="stepHasChanged($event)"
+  >
+    <mat-step
+      *ngFor="let step of getFormStepNamesArray(); let i = index"
+      [completed]="form.controls[step].valid"
+      [stepControl]="step"
+      [hasError]="form.controls[step].invalid"
+    >
       <ng-template matStepLabel>{{ step }}</ng-template>
-      <!-- <mat-form-field>
-        <input
-          matInput
-          placeholder="Last name, First name"
-          formControlName="firstCtrl"
-          required
-        />
-      </mat-form-field> -->
-      <app-question
-        *ngFor="let question of getQuestionsJsonByIndex(i); let i = index"
-        [form]="form"
-        [formControlNameIndex]="i"
-        [formArray]="getFormArrayByStepName(step)"
-        [stepName]="step"
-        [question]="question"
-        [dependenciesStatuses]="dependenciesStatuses"
-      ></app-question>
+      <form [formGroup]="form.controls[step]">
+        <app-question
+          *ngFor="let question of getQuestionsJsonByIndex(i); let i = index"
+          [form]="form"
+          [formControlNameIndex]="i"
+          [formArray]="getFormArrayByStepName(step)"
+          [updateStepValidation]="updateStepValidation.bind(this)"
+          [dynamicForm]="dynamicForm"
+          [stepName]="step"
+          [question]="question"
+          [dependenciesStatuses]="dependenciesStatuses"
+        ></app-question>
+      </form>
       <div>
         <button mat-button type="button" *ngIf="i !== 0" matStepperPrevious>
           Back
         </button>
         <button
+          [disabled]="isFormArrayIsInvalid(step)"
           *ngIf="i !== getFormStepNamesArray().length - 1"
           mat-button
           type="button"
@@ -40,7 +38,11 @@
         >
           Next
         </button>
-        <button mat-button>
+        <button
+          *ngIf="i == getFormStepNamesArray().length - 1"
+          [disabled]="form.invalid"
+          mat-button
+        >
           Done
         </button>
       </div>

@@ -2,8 +2,8 @@ import { DynamicForm } from './Models/interfaces/dynamicForm.interface';
 
 
 const x = {
-  "formName": "טופס חדש",
-  "guid": "18381843-aa76-47fc-8ade-10d0a6f18a6b",
+  "formName": "טופס דמו",
+  "guid": "e227b0d7-1aa0-4259-8ac1-f80e7df07199",
   "FullForm": [
     {
       "step": {
@@ -12,34 +12,77 @@ const x = {
       },
       "items": [
         {
-          "type": "checkbox",
+          "type": "dropdown",
           "inputType": "text",
-          "key": "ITM_701",
-          "label": "תיבת סימון",
+          "key": "ITM_710",
+          "label": "רשימה נפתחת",
           "order": 0,
-          "required": false,
+          "required": true,
           "floatField": 0,
           "value": "",
           "options": [
             {
-              "key": "OPN_500",
-              "value": "לחוץ",
+              "key": "OPN_502",
+              "value": "1",
               "formStep": 0,
-              "source": "ITM_701",
-              "targets": "[\"ITM_700\"]"
+              "source": "ITM_710",
+              "targets": "[\"ITM_703\"]"
             },
             {
-              "key": "OPN_501",
-              "value": "לא לחוץ",
+              "key": "OPN_503",
+              "value": "2",
               "formStep": 0,
-              "source": "ITM_701",
+              "source": "ITM_710",
+              "targets": "[\"ITM_705\"]"
+            },
+            {
+              "key": "OPN_504",
+              "value": "3",
+              "formStep": 0,
+              "source": "ITM_710",
               "targets": "[]"
             }
           ],
-          "api": null,
+          "api": {
+            "name": null,
+            "url": null
+          },
           "dependence": null,
           "isOnDependence": false,
-          "hebName": "תיבת סימון",
+          "hebName": "רשימה נפתחת",
+          "isRowItem": false,
+          "subItems": [],
+          "uploadValidator": "",
+          "formStep": 0,
+          "settings": {
+            "arrangeOption": false
+          },
+          "group": "",
+          "duplicatorKey": "",
+          "tooltip": "",
+          "disabled": false
+        },
+        {
+          "type": "input",
+          "inputType": "text",
+          "key": "ITM_703",
+          "label": "1",
+          "order": 1,
+          "required": true,
+          "floatField": 0,
+          "value": "",
+          "options": [],
+          "api": null,
+          "dependence": {
+            "formStep": 0,
+            "source": "ITM_710",
+            "target": "ITM_703",
+            "termType": "=",
+            "term": "OPN_502",
+            "termValue": "1"
+          },
+          "isOnDependence": true,
+          "hebName": "שדה טקסט",
           "isRowItem": false,
           "subItems": [],
           "uploadValidator": "",
@@ -56,9 +99,9 @@ const x = {
         {
           "type": "input",
           "inputType": "text",
-          "key": "ITM_700",
-          "label": "שדה טקסט",
-          "order": 1,
+          "key": "ITM_705",
+          "label": "2",
+          "order": 2,
           "required": true,
           "floatField": 0,
           "value": "",
@@ -66,11 +109,11 @@ const x = {
           "api": null,
           "dependence": {
             "formStep": 0,
-            "source": "ITM_701",
-            "target": "ITM_700",
+            "source": "ITM_710",
+            "target": "ITM_705",
             "termType": "=",
-            "term": "OPN_500",
-            "termValue": "לחוץ"
+            "term": "OPN_503",
+            "termValue": "2"
           },
           "isOnDependence": true,
           "hebName": "שדה טקסט",
@@ -83,9 +126,43 @@ const x = {
           "settings": null,
           "group": "",
           "duplicatorKey": "",
-          "tooltip": "זה שדה חדש!",
+          "tooltip": "",
           "disabled": false,
           "onlyPdf": false
+        }
+      ]
+    },
+    {
+      "step": {
+        "formStep": 1,
+        "stepName": "שלב 2"
+      },
+      "items": [
+        {
+          "type": "input",
+          "inputType": "text",
+          "key": "ITM_711",
+          "label": "שדה טקסט",
+          "order": 0,
+          "required": true,
+          "floatField": 0,
+          "value": "",
+          "options": [],
+          "api": null,
+          "dependence": null,
+          "isOnDependence": false,
+          "hebName": "שדה טקסט",
+          "isRowItem": false,
+          "subItems": [],
+          "uploadValidator": "",
+          "min": "0",
+          "max": "50",
+          "formStep": 1,
+          "settings": null,
+          "group": "",
+          "duplicatorKey": "",
+          "tooltip": "",
+          "disabled": false
         }
       ]
     }
@@ -93,66 +170,118 @@ const x = {
   "Dependence": [
     {
       "formStep": 0,
-      "source": "ITM_701",
-      "target": "ITM_700",
+      "source": "ITM_710",
+      "target": "ITM_703",
       "termType": "=",
-      "term": "OPN_500",
-      "termValue": "לחוץ"
-    }
-  ],
-  "urls": [
-    {
-      "text": "דף הבית",
-      "icon": null,
-      "url": "google.com"
-    }
-  ],
-  "options": [
-    {
-      "key": "OPN_500",
-      "value": "לחוץ",
-      "formStep": 0,
-      "source": "ITM_701",
-      "targets": "[\"ITM_700\"]"
+      "term": "OPN_502",
+      "termValue": "1"
     },
     {
-      "key": "OPN_501",
-      "value": "לא לחוץ",
       "formStep": 0,
-      "source": "ITM_701",
+      "source": "ITM_710",
+      "target": "ITM_705",
+      "termType": "=",
+      "term": "OPN_503",
+      "termValue": "2"
+    }
+  ],
+  "urls": [],
+  "options": [
+    {
+      "key": "OPN_502",
+      "value": "1",
+      "formStep": 0,
+      "source": "ITM_710",
+      "targets": "[\"ITM_703\"]"
+    },
+    {
+      "key": "OPN_503",
+      "value": "2",
+      "formStep": 0,
+      "source": "ITM_710",
+      "targets": "[\"ITM_705\"]"
+    },
+    {
+      "key": "OPN_504",
+      "value": "3",
+      "formStep": 0,
+      "source": "ITM_710",
       "targets": "[]"
     }
   ],
   "flatItemsArray": [
     {
-      "type": "checkbox",
+      "type": "dropdown",
       "inputType": "text",
-      "key": "ITM_701",
-      "label": "תיבת סימון",
+      "key": "ITM_710",
+      "label": "רשימה נפתחת",
       "order": 0,
-      "required": false,
+      "required": true,
       "floatField": 0,
       "value": "",
       "options": [
         {
-          "key": "OPN_500",
-          "value": "לחוץ",
+          "key": "OPN_502",
+          "value": "1",
           "formStep": 0,
-          "source": "ITM_701",
-          "targets": "[\"ITM_700\"]"
+          "source": "ITM_710",
+          "targets": "[\"ITM_703\"]"
         },
         {
-          "key": "OPN_501",
-          "value": "לא לחוץ",
+          "key": "OPN_503",
+          "value": "2",
           "formStep": 0,
-          "source": "ITM_701",
+          "source": "ITM_710",
+          "targets": "[\"ITM_705\"]"
+        },
+        {
+          "key": "OPN_504",
+          "value": "3",
+          "formStep": 0,
+          "source": "ITM_710",
           "targets": "[]"
         }
       ],
-      "api": null,
+      "api": {
+        "name": null,
+        "url": null
+      },
       "dependence": null,
       "isOnDependence": false,
-      "hebName": "תיבת סימון",
+      "hebName": "רשימה נפתחת",
+      "isRowItem": false,
+      "subItems": [],
+      "uploadValidator": "",
+      "formStep": 0,
+      "settings": {
+        "arrangeOption": false
+      },
+      "group": "",
+      "duplicatorKey": "",
+      "tooltip": "",
+      "disabled": false
+    },
+    {
+      "type": "input",
+      "inputType": "text",
+      "key": "ITM_703",
+      "label": "1",
+      "order": 1,
+      "required": true,
+      "floatField": 0,
+      "value": "",
+      "options": [],
+      "api": null,
+      "dependence": {
+        "formStep": 0,
+        "source": "ITM_710",
+        "target": "ITM_703",
+        "termType": "=",
+        "term": "OPN_502",
+        "termValue": "1"
+      },
+      "isOnDependence": true,
+      "hebName": "שדה טקסט",
       "isRowItem": false,
       "subItems": [],
       "uploadValidator": "",
@@ -169,9 +298,9 @@ const x = {
     {
       "type": "input",
       "inputType": "text",
-      "key": "ITM_700",
-      "label": "שדה טקסט",
-      "order": 1,
+      "key": "ITM_705",
+      "label": "2",
+      "order": 2,
       "required": true,
       "floatField": 0,
       "value": "",
@@ -179,11 +308,11 @@ const x = {
       "api": null,
       "dependence": {
         "formStep": 0,
-        "source": "ITM_701",
-        "target": "ITM_700",
+        "source": "ITM_710",
+        "target": "ITM_705",
         "termType": "=",
-        "term": "OPN_500",
-        "termValue": "לחוץ"
+        "term": "OPN_503",
+        "termValue": "2"
       },
       "isOnDependence": true,
       "hebName": "שדה טקסט",
@@ -196,9 +325,35 @@ const x = {
       "settings": null,
       "group": "",
       "duplicatorKey": "",
-      "tooltip": "זה שדה חדש!",
+      "tooltip": "",
       "disabled": false,
       "onlyPdf": false
+    },
+    {
+      "type": "input",
+      "inputType": "text",
+      "key": "ITM_711",
+      "label": "שדה טקסט",
+      "order": 0,
+      "required": true,
+      "floatField": 0,
+      "value": "",
+      "options": [],
+      "api": null,
+      "dependence": null,
+      "isOnDependence": false,
+      "hebName": "שדה טקסט",
+      "isRowItem": false,
+      "subItems": [],
+      "uploadValidator": "",
+      "min": "0",
+      "max": "50",
+      "formStep": 1,
+      "settings": null,
+      "group": "",
+      "duplicatorKey": "",
+      "tooltip": "",
+      "disabled": false
     }
   ],
   "Style": {

@@ -1,39 +1,37 @@
-<div [formGroup]="formArray">
-    <div [ngSwitch]="question.type">
-      <div
-        *ngIf="
-          dependenciesStatuses[question.key] === undefined ||
-          dependenciesStatuses[question.key]
-        "
-      >
-        <mat-form-field
-          *ngSwitchCase="'email'"
-        >
-          <input
-            [required]="question.required"
-            [disabled]="question.disabled"
-            (change)="inputChange(question.key, true)"
-            matInput
-            [formControlName]="FormControlName"
-            [id]="question.key"
-            [type]="question.inputType"
-            [style.direction]="
-              question.inputType == 'email' || question.inputType == 'tel'
-                ? 'ltr'
-                : ''
-            "
-            placeholder="{{ question.label }}"
-          />
-          <mat-icon
-            matSuffix
-            class="tooltip-icon"
-            *ngIf="question.tooltip"
-            [matTooltip]="question.tooltip"
-            >info
-          </mat-icon>
-        </mat-form-field>
+<div [formGroup]="formArray" *ngIf="dependenciesStatuses[question.key]">
+  <div [ngSwitch]="question.type">
+    <div
+      *ngIf="
+        dependenciesStatuses[question.key] === undefined ||
+        dependenciesStatuses[question.key]
+      "
+    >
+      <mat-form-field *ngSwitchCase="'email'">
+        <input
+          [required]="question.required"
+          [disabled]="question.disabled"
+          (change)="inputChange(question.key, true)"
+          matInput
+          [formControlName]="FormControlName"
+          [id]="question.key"
+          [type]="question.inputType"
+          [style.direction]="
+            question.inputType == 'email' || question.inputType == 'tel'
+              ? 'ltr'
+              : ''
+          "
+          placeholder="{{ question.label }}"
+        />
+        <mat-icon
+          matSuffix
+          class="tooltip-icon"
+          *ngIf="question.tooltip"
+          [matTooltip]="question.tooltip"
+          >info
+        </mat-icon>
+      </mat-form-field>
 
-        <!-- <ng-container *ngSwitchCase="'duplicate-remover'">
+      <!-- <ng-container *ngSwitchCase="'duplicate-remover'">
           <div
             class="remove-button"
           >
@@ -47,58 +45,54 @@
           </div>
         </ng-container> -->
 
-        <mat-form-field
-          *ngSwitchCase="'textarea'"
-        >
-          <textarea
-            [required]="question.required"
-            [disabled]="question.disabled"
-            (change)="inputChange(question.key, true)"
-            matInput
-            class="textarea-item"
-            matTextareaAutosize="true"
-            [formControlName]="FormControlName"
-            [id]="question.key"
-            [type]="question.inputType"
-            placeholder="{{ question.label }}"
-          ></textarea>
-          <mat-icon
-            matSuffix
-            class="tooltip-icon"
-            *ngIf="question.tooltip"
-            [matTooltip]="question.tooltip"
-            >info
-          </mat-icon>
-        </mat-form-field>
+      <mat-form-field *ngSwitchCase="'textarea'">
+        <textarea
+          [required]="question.required"
+          [disabled]="question.disabled"
+          (change)="inputChange(question.key, true)"
+          matInput
+          class="textarea-item"
+          matTextareaAutosize="true"
+          [formControlName]="FormControlName"
+          [id]="question.key"
+          [type]="question.inputType"
+          placeholder="{{ question.label }}"
+        ></textarea>
+        <mat-icon
+          matSuffix
+          class="tooltip-icon"
+          *ngIf="question.tooltip"
+          [matTooltip]="question.tooltip"
+          >info
+        </mat-icon>
+      </mat-form-field>
 
-        <mat-form-field
-          *ngSwitchCase="'input'"
-        >
-          <input
-            [required]="question.required"
-            [disabled]="question.disabled"
-            (change)="inputChange(question.key, true)"
-            matInput
-            [formControlName]="FormControlName"
-            [id]="question.key"
-            [type]="question.inputType === 'tel' ? 'number' : question.inputType"
-            [style.direction]="
-              question.inputType == 'email' || question.inputType == 'tel'
-                ? 'ltr'
-                : ''
-            "
-            placeholder="{{ question.label }}"
-          />
-          <mat-icon
-            matSuffix
-            class="tooltip-icon"
-            *ngIf="question.tooltip"
-            [matTooltip]="question.tooltip"
-            >info
-          </mat-icon>
-        </mat-form-field>
+      <mat-form-field *ngSwitchCase="'input'">
+        <input
+          [required]="question.required"
+          [disabled]="question.disabled"
+          (change)="inputChange(question.key, true)"
+          matInput
+          [formControlName]="FormControlName"
+          [id]="question.key"
+          [type]="question.inputType === 'tel' ? 'number' : question.inputType"
+          [style.direction]="
+            question.inputType == 'email' || question.inputType == 'tel'
+              ? 'ltr'
+              : ''
+          "
+          placeholder="{{ question.label }}"
+        />
+        <mat-icon
+          matSuffix
+          class="tooltip-icon"
+          *ngIf="question.tooltip"
+          [matTooltip]="question.tooltip"
+          >info
+        </mat-icon>
+      </mat-form-field>
 
-        <!-- <ng-container *ngSwitchCase="'signature'">
+      <!-- <ng-container *ngSwitchCase="'signature'">
           <div (mouseup)="delayedinputChaged(150, question.key, true)">
             <app-signature
               required="true"
@@ -119,11 +113,11 @@
           </div>
         </ng-container> -->
 
-        <ng-container *ngSwitchCase="'itemGroup'">
-          <mat-label>{{ question.label }}</mat-label>
-        </ng-container>
+      <ng-container *ngSwitchCase="'itemGroup'">
+        <mat-label>{{ question.label }}</mat-label>
+      </ng-container>
 
-        <!-- <ng-container *ngSwitchCase="'iframe'">
+      <!-- <ng-container *ngSwitchCase="'iframe'">
           <iframe
             [src]="iframeValue.url | safeURL"
             [width]="iframeValue.width"
@@ -138,31 +132,29 @@
           </mat-icon>
         </ng-container> -->
 
-        <mat-form-field
-          *ngSwitchCase="'dropdown'"
+      <mat-form-field *ngSwitchCase="'dropdown'">
+        <mat-select
+          [required]="question.required"
+          [disabled]="question.disabled"
+          (selectionChange)="inputChange(question.key, true)"
+          [id]="question.key"
+          placeholder="{{ question.label }}"
+          [formControlName]="FormControlName"
         >
-          <mat-select
-            [required]="question.required"
-            [disabled]="question.disabled"
-            (selectionChange)="inputChange(question.key, true)"
-            [id]="question.key"
-            placeholder="{{ question.label }}"
-            [formControlName]="FormControlName"
-          >
-            <mat-option *ngFor="let opt of question.options" [value]="opt.key">
-              {{ opt.value }}
-            </mat-option>
-          </mat-select>
-          <mat-icon
-            matSuffix
-            class="tooltip-icon"
-            *ngIf="question.tooltip"
-            [matTooltip]="question.tooltip"
-            >info
-          </mat-icon>
-        </mat-form-field>
+          <mat-option *ngFor="let opt of question.options" [value]="opt.key">
+            {{ opt.value }}
+          </mat-option>
+        </mat-select>
+        <mat-icon
+          matSuffix
+          class="tooltip-icon"
+          *ngIf="question.tooltip"
+          [matTooltip]="question.tooltip"
+          >info
+        </mat-icon>
+      </mat-form-field>
 
-        <!-- <div *ngSwitchCase="'uploadfile'">
+      <!-- <div *ngSwitchCase="'uploadfile'">
           <app-drag-upload
             [question]="question"
             [form]="form"
@@ -177,65 +169,36 @@
           </mat-icon>
         </div> -->
 
-        <mat-radio-group
-          (change)="inputChange(question.key, true)"
-          [required]="question.required"
-          *ngSwitchCase="'radio'"
-          [formControlName]="FormControlName"
-
+      <mat-radio-group
+        (change)="inputChange(question.key, true)"
+        [required]="question.required"
+        *ngSwitchCase="'radio'"
+        [formControlName]="FormControlName"
+      >
+        <label class="mat-radio-label">
+          {{ question.label }}
+          <mat-icon
+            class="tooltip-icon"
+            *ngIf="question.tooltip"
+            [matTooltip]="question.tooltip"
+            >info
+          </mat-icon>
+        </label>
+        <mat-radio-button
+          *ngFor="let opt of question.options"
+          [value]="opt.key"
+          >{{ opt.value }}</mat-radio-button
         >
-          <label class="mat-radio-label">
-            {{ question.label }}
-            <mat-icon
-              class="tooltip-icon"
-              *ngIf="question.tooltip"
-              [matTooltip]="question.tooltip"
-              >info
-            </mat-icon>
-          </label>
-          <mat-radio-button
-            *ngFor="let opt of question.options"
-            [value]="opt.key"
-            >{{ opt.value }}</mat-radio-button
-          >
-        </mat-radio-group>
+      </mat-radio-group>
 
-        <mat-radio-group
-          (change)="inputChange(question.key, true)"
-          *ngSwitchCase="'nested-radio'"
-          [required]="question.required"
-          [formControlName]="FormControlName"
-        >
-          <label class="mat-radio-label">
-            {{ question.label }}
-            <mat-icon
-              matSuffix
-              class="tooltip-icon"
-              *ngIf="question.tooltip"
-              [matTooltip]="question.tooltip"
-              >info
-            </mat-icon>
-          </label>
-          <mat-radio-button
-            *ngFor="let opt of question.options"
-            [value]="opt.key"
-            >{{ opt.value }}</mat-radio-button
-          >
-        </mat-radio-group>
-
-        <div *ngSwitchCase="'slidetoggle'">
-          <mat-slide-toggle
-            [required]="question.required"
-            [disabled]="question.disabled"
-            (change)="inputChange(question.key, true, question.options)"
-            [formControlName]="FormControlName"
-            [required]="question.required"
-            [disabled]="question.disabled"
-            [(ngModel)]="question.value"
-            [id]="question.key"
-            >{{ question.label }}
-            {{ question.required ? '*' : '' }}</mat-slide-toggle
-          >
+      <mat-radio-group
+        (change)="inputChange(question.key, true)"
+        *ngSwitchCase="'nested-radio'"
+        [required]="question.required"
+        [formControlName]="FormControlName"
+      >
+        <label class="mat-radio-label">
+          {{ question.label }}
           <mat-icon
             matSuffix
             class="tooltip-icon"
@@ -243,25 +206,64 @@
             [matTooltip]="question.tooltip"
             >info
           </mat-icon>
-        </div>
+        </label>
+        <mat-radio-button
+          *ngFor="let opt of question.options"
+          [value]="opt.key"
+          >{{ opt.value }}</mat-radio-button
+        >
+      </mat-radio-group>
 
-        <div *ngSwitchCase="'checkbox'">
-          <mat-checkbox
-            [required]="question.required"
-            [disabled]="question.disabled"
-            (change)="inputChange(question.key, true, question.options)"
-            [(ngModel)]="question.value"
-            [id]="question.key"
-            [required]="question.required"
-            [disabled]="question.disabled"
-            [formControlName]="FormControlName"
-            [(ngModel)]="isTrue"
+      <div *ngSwitchCase="'slidetoggle'">
+        <mat-slide-toggle
+          [required]="question.required"
+          [disabled]="question.disabled"
+          (change)="inputChange(question.key, true, question.options)"
+          [formControlName]="FormControlName"
+          [required]="question.required"
+          [disabled]="question.disabled"
+          [(ngModel)]="question.value"
+          [id]="question.key"
+          >{{ question.label }}
+          {{ question.required ? '*' : '' }}</mat-slide-toggle
+        >
+        <mat-icon
+          matSuffix
+          class="tooltip-icon"
+          *ngIf="question.tooltip"
+          [matTooltip]="question.tooltip"
+          >info
+        </mat-icon>
+      </div>
 
-            #checkbox
-          >
-            {{ question.label }}
-            {{ question.required ? '*' : '' }}
-          </mat-checkbox>
+      <div *ngSwitchCase="'checkbox'">
+        <mat-checkbox
+          [required]="question.required"
+          [disabled]="question.disabled"
+          (change)="inputChange(question.key, true, question.options)"
+          [(ngModel)]="question.value"
+          [id]="question.key"
+          [required]="question.required"
+          [disabled]="question.disabled"
+          [formControlName]="FormControlName"
+          [(ngModel)]="isTrue"
+          #checkbox
+        >
+          {{ question.label }}
+          {{ question.required ? '*' : '' }}
+        </mat-checkbox>
+        <mat-icon
+          matSuffix
+          class="tooltip-icon"
+          *ngIf="question.tooltip"
+          [matTooltip]="question.tooltip"
+          >info
+        </mat-icon>
+      </div>
+
+      <div *ngSwitchCase="'slider'">
+        <label>
+          {{ question.label }}
           <mat-icon
             matSuffix
             class="tooltip-icon"
@@ -269,86 +271,72 @@
             [matTooltip]="question.tooltip"
             >info
           </mat-icon>
-        </div>
-
-        <div *ngSwitchCase="'slider'">
-          <label>
-            {{ question.label }}
-            <mat-icon
-              matSuffix
-              class="tooltip-icon"
-              *ngIf="question.tooltip"
-              [matTooltip]="question.tooltip"
-              >info
-            </mat-icon>
-          </label>
-          <mat-slider
-            [required]="question.required"
-            [disabled]="question.disabled"
-            (change)="inputChange(question.key, true)"
-            [formControlName]="FormControlName"
-            [id]="question.key"
-            thumbLabel
-            [min]="question.min"
-            [max]="question.max"
-            tickInterval="1"
-            [(ngModel)]="question.value"
-          >
-          </mat-slider>
-        </div>
-
-        <div *ngSwitchCase="'label'">
-          <label [style.fontSize]="question.value + 'px'">
-            {{ question.label }}
-          </label>
-          <mat-form-field [ngStyle]="{ display: 'none' }">
-            <input
-              [required]="question.required"
-              [disabled]="question.disabled"
-              (change)="inputChange(question.key, true)"
-              matInput
-              [formControlName]="FormControlName"
-              #inputLabel
-              [id]="question.key"
-            />
-          </mat-form-field>
-        </div>
-
-        <div *ngSwitchCase="'paragraph'" [innerHTML]="question.value">
-          <!-- <input (change)="inputChange(question.key, true)" matInput [formControlName]="FormControlName" #inputLabel
-            [id]="question.key" /> -->
-        </div>
-
-        <mat-form-field
-          *ngSwitchCase="'datepicker'"
+        </label>
+        <mat-slider
+          [required]="question.required"
+          [disabled]="question.disabled"
+          (change)="inputChange(question.key, true)"
+          [formControlName]="FormControlName"
+          [id]="question.key"
+          thumbLabel
+          [min]="question.min"
+          [max]="question.max"
+          tickInterval="1"
+          [(ngModel)]="question.value"
         >
+        </mat-slider>
+      </div>
+
+      <div *ngSwitchCase="'label'">
+        <label [style.fontSize]="question.value + 'px'">
+          {{ question.label }}
+        </label>
+        <mat-form-field [ngStyle]="{ display: 'none' }">
           <input
+            [required]="question.required"
+            [disabled]="question.disabled"
             (change)="inputChange(question.key, true)"
             matInput
-            [matDatepicker]="picker"
-            placeholder="{{ question.label }}"
             [formControlName]="FormControlName"
-            [required]="question.required"
-            [disabled]="question.disabled"
+            #inputLabel
+            [id]="question.key"
           />
-          <mat-icon
-            matSuffix
-            class="tooltip-icon"
-            *ngIf="question.tooltip"
-            [matTooltip]="question.tooltip"
-            >info
-          </mat-icon>
-
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker
-            [touchUi]="true"
-            (closed)="inputChange(question.key, true)"
-            #picker
-          >
-          </mat-datepicker>
         </mat-form-field>
+      </div>
 
-        <!-- <div class="duplicate-item-add" *ngSwitchCase="'duplicateBtn'">
+      <div *ngSwitchCase="'paragraph'" [innerHTML]="question.value">
+        <!-- <input (change)="inputChange(question.key, true)" matInput [formControlName]="FormControlName" #inputLabel
+            [id]="question.key" /> -->
+      </div>
+
+      <mat-form-field *ngSwitchCase="'datepicker'">
+        <input
+          (change)="inputChange(question.key, true)"
+          matInput
+          [matDatepicker]="picker"
+          placeholder="{{ question.label }}"
+          [formControlName]="FormControlName"
+          [required]="question.required"
+          [disabled]="question.disabled"
+        />
+        <mat-icon
+          matSuffix
+          class="tooltip-icon"
+          *ngIf="question.tooltip"
+          [matTooltip]="question.tooltip"
+          >info
+        </mat-icon>
+
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker
+          [touchUi]="true"
+          (closed)="inputChange(question.key, true)"
+          #picker
+        >
+        </mat-datepicker>
+      </mat-form-field>
+
+      <!-- <div class="duplicate-item-add" *ngSwitchCase="'duplicateBtn'">
           <mat-divider></mat-divider>
           <button
             class="add-duplicate-btn"
@@ -369,8 +357,6 @@
             [disabled]="question.disabled"
           />
         </div> -->
-
-
-      </div>
     </div>
   </div>
+</div>
