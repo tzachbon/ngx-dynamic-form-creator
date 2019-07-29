@@ -14,6 +14,8 @@ export interface FormItem {
   dependence: Dependence;
   isOnDependence: boolean;
   hebName: string;
+  tooltip: string;
+  disabled: string;
   isRowItem: boolean;
   subItems: FormItem[];
   uploadValidator: string;

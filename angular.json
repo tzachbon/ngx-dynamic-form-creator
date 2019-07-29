@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -88,6 +89,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -130,7 +132,8 @@
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
             "tsConfig": "projects/ngx-dynamic-form-creator/tsconfig.lib.json",
-            "project": "projects/ngx-dynamic-form-creator/ng-package.json"
+            "project": "projects/ngx-dynamic-form-creator/ng-package.json",
+
           },
           "configurations": {
             "production": {

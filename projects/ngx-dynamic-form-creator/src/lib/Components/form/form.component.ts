@@ -12,7 +12,9 @@ import { FormItem } from '../../Models/interfaces/formItem.interface';
 })
 export class FormComponent implements OnInit {
   @Input() dynamicForm: DynamicForm;
+  @Input() onSubmit: (values: any) => void;
   form: FormGroup;
+  dependenciesStatuses = {};
 
 
   constructor() { }
@@ -22,6 +24,26 @@ export class FormComponent implements OnInit {
     console.log('====================================');
     console.log(this.form);
     console.log('====================================');
+  }
+
+  getFormArrayByStepName(name: string): FormArray {
+    return (this.form.controls[name] as FormArray);
+  }
+
+  getQuestionsJsonByIndex(index: number): FormItem[] {
+    return this.dynamicForm.FullForm[index].items;
+  }
+
+  getFormStepNamesArray(): string[] {
+    if (this.form) {
+      return Object.keys(this.form.controls);
+    } else {
+      return [];
+    }
+  }
+
+  onSubmitHandler() {
+    this.onSubmit(this.form.value);
   }
 
   createFormGroup(dynamicForm: DynamicForm): FormGroup {
@@ -39,6 +61,8 @@ export class FormComponent implements OnInit {
 
 
   createFormControl(item: FormItem): FormControl {
+    this.addToDependenceStatuses(item);
+
     const validators = [];
     if (item.required) {
       switch (item.type) {
@@ -53,6 +77,11 @@ export class FormComponent implements OnInit {
     }
     const control = new FormControl(item.value, validators);
     return control;
+  }
+
+  addToDependenceStatuses(item: FormItem) {
+    // Object.assign(this.dependenciesStatuses, { [item.key]: true });
+    this.dependenciesStatuses[item.key] = true;
   }
 
 }

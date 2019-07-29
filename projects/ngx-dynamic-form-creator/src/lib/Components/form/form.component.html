@@ -1,1 +1,49 @@
+<!--
+<form [formGroup]="form">
+<mat-vertical-stepper>
+  <mat-step *ngFor="let step of getFormStepNamesArray()" [label]="step">
+    {{step}}
+  </mat-step>
 
+</mat-vertical-stepper>
+</form> -->
+<form [formGroup]="form" (ngSubmit)="onSubmitHandler()">
+  <mat-horizontal-stepper labelPosition="bottom" #stepper>
+    <mat-step *ngFor="let step of getFormStepNamesArray(); let i = index">
+      <ng-template matStepLabel>{{ step }}</ng-template>
+      <!-- <mat-form-field>
+        <input
+          matInput
+          placeholder="Last name, First name"
+          formControlName="firstCtrl"
+          required
+        />
+      </mat-form-field> -->
+      <app-question
+        *ngFor="let question of getQuestionsJsonByIndex(i); let i = index"
+        [form]="form"
+        [formControlNameIndex]="i"
+        [formArray]="getFormArrayByStepName(step)"
+        [stepName]="step"
+        [question]="question"
+        [dependenciesStatuses]="dependenciesStatuses"
+      ></app-question>
+      <div>
+        <button mat-button type="button" *ngIf="i !== 0" matStepperPrevious>
+          Back
+        </button>
+        <button
+          *ngIf="i !== getFormStepNamesArray().length - 1"
+          mat-button
+          type="button"
+          matStepperNext
+        >
+          Next
+        </button>
+        <button mat-button>
+          Done
+        </button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</form>
