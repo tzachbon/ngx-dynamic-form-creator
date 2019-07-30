@@ -1,51 +1,118 @@
-<form [formGroup]="form" (ngSubmit)="onSubmitHandler()">
-  <mat-horizontal-stepper
-    [linear]="true"
-    labelPosition="bottom"
-    #stepper
-    (selectionChange)="stepHasChanged($event)"
+<ng-container *ngIf="settings.position === 'horizontal'; else vertical">
+  <form
+    [dir]="settings.dir"
+    [formGroup]="form"
+    (ngSubmit)="onSubmitHandler()"
+    [ngClass]="settings.stepperClassName"
   >
-    <mat-step
-      *ngFor="let step of getFormStepNamesArray(); let i = index"
-      [completed]="form.controls[step].valid"
-      [stepControl]="step"
-      [hasError]="form.controls[step].invalid"
+    <mat-horizontal-stepper
+      [linear]="false"
+      labelPosition="bottom"
+      #stepper
+      (selectionChange)="stepHasChanged($event)"
     >
-      <ng-template matStepLabel>{{ step }}</ng-template>
-      <form [formGroup]="form.controls[step]">
-        <app-question
-          *ngFor="let question of getQuestionsJsonByIndex(i); let i = index"
-          [form]="form"
-          [formControlNameIndex]="i"
-          [formArray]="getFormArrayByStepName(step)"
-          [updateStepValidation]="updateStepValidation.bind(this)"
-          [dynamicForm]="dynamicForm"
-          [stepName]="step"
-          [question]="question"
-          [dependenciesStatuses]="dependenciesStatuses"
-        ></app-question>
-      </form>
-      <div>
-        <button mat-button type="button" *ngIf="i !== 0" matStepperPrevious>
-          Back
-        </button>
-        <button
-          [disabled]="isFormArrayIsInvalid(step)"
-          *ngIf="i !== getFormStepNamesArray().length - 1"
-          mat-button
-          type="button"
-          matStepperNext
-        >
-          Next
-        </button>
-        <button
-          *ngIf="i == getFormStepNamesArray().length - 1"
-          [disabled]="form.invalid"
-          mat-button
-        >
-          Done
-        </button>
-      </div>
-    </mat-step>
-  </mat-horizontal-stepper>
-</form>
+      <mat-step
+        *ngFor="let step of getFormStepNamesArray(); let i = index"
+        [completed]="form.controls[step].valid"
+        [stepControl]="step"
+        [hasError]="form.controls[step].invalid"
+      >
+        <ng-template matStepLabel>{{ step }}</ng-template>
+        <form [formGroup]="form.controls[step]">
+          <app-question
+            *ngFor="let question of getQuestionsJsonByIndex(i); let i = index"
+            [form]="form"
+            [formControlNameIndex]="i"
+            [formArray]="getFormArrayByStepName(step)"
+            [settings]="settings"
+            [updateStepValidation]="updateStepValidation.bind(this)"
+            [dynamicForm]="dynamicForm"
+            [stepName]="step"
+            [question]="question"
+            [dependenciesStatuses]="dependenciesStatuses"
+          ></app-question>
+        </form>
+        <div>
+          <button mat-button type="button" *ngIf="i !== 0" matStepperPrevious>
+            {{ settings.buttonText.back ? settings.buttonText.back : 'Back' }}
+          </button>
+          <button
+            [disabled]="isFormArrayIsInvalid(step)"
+            *ngIf="i !== getFormStepNamesArray().length - 1"
+            mat-button
+            type="button"
+            matStepperNext
+          >
+            {{ settings.buttonText.next ? settings.buttonText.next : 'Next' }}
+          </button>
+          <button
+            *ngIf="i == getFormStepNamesArray().length - 1"
+            [disabled]="form.invalid"
+            mat-button
+          >
+            {{ settings.buttonText.done ? settings.buttonText.done : 'Done' }}
+          </button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </form>
+</ng-container>
+<ng-template #vertical>
+  <form
+    [dir]="settings.dir"
+    [formGroup]="form"
+    (ngSubmit)="onSubmitHandler()"
+    [ngClass]="settings.stepperClassName"
+  >
+    <mat-vertical-stepper
+      [linear]="true"
+      labelPosition="bottom"
+      #stepper
+      (selectionChange)="stepHasChanged($event)"
+    >
+      <mat-step
+        *ngFor="let step of getFormStepNamesArray(); let i = index"
+        [completed]="form.controls[step].valid"
+        [stepControl]="step"
+        [hasError]="form.controls[step].invalid"
+      >
+        <ng-template matStepLabel>{{ step }}</ng-template>
+        <form [formGroup]="form.controls[step]">
+          <app-question
+            *ngFor="let question of getQuestionsJsonByIndex(i); let i = index"
+            [form]="form"
+            [formControlNameIndex]="i"
+            [formArray]="getFormArrayByStepName(step)"
+            [settings]="settings"
+            [updateStepValidation]="updateStepValidation.bind(this)"
+            [dynamicForm]="dynamicForm"
+            [stepName]="step"
+            [question]="question"
+            [dependenciesStatuses]="dependenciesStatuses"
+          ></app-question>
+        </form>
+        <div>
+          <button mat-button type="button" *ngIf="i !== 0" matStepperPrevious>
+            {{ settings.buttonText.back ? settings.buttonText.back : 'Back' }}
+          </button>
+          <button
+            [disabled]="isFormArrayIsInvalid(step)"
+            *ngIf="i !== getFormStepNamesArray().length - 1"
+            mat-button
+            type="button"
+            matStepperNext
+          >
+            {{ settings.buttonText.next ? settings.buttonText.next : 'Next' }}
+          </button>
+          <button
+            *ngIf="i == getFormStepNamesArray().length - 1"
+            [disabled]="form.invalid"
+            mat-button
+          >
+            {{ settings.buttonText.done ? settings.buttonText.done : 'Done' }}
+          </button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </form>
+</ng-template>

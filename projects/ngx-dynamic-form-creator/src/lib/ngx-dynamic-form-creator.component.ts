@@ -1,28 +1,41 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DynamicForm } from './Models/interfaces/dynamicForm.interface';
 
+export interface ISettings {
+  formName: string;
+  position: 'horizontal' | 'vertical';
+  buttonText: {
+    next: string,
+    back: string,
+    done: string
+  };
+  formFieldClassName: string;
+  stepperClassName: string;
+  dir: 'rtl' | 'ltr';
+}
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'ngx-dynamic-form-creator',
-  template: `
-  <app-form [dynamicForm]="dynamicForm" [onSubmit]="onSubmit"></app-form>
+  template:
+    `
+  <app-form [dynamicForm]="dynamicForm" [onSubmit]="onSubmit" [settings]="settings"></app-form>
   `,
   styles: []
 })
 export class NgxDynamicFormCreatorComponent implements OnInit {
   @Input() dynamicForm: DynamicForm;
-  constructor() { }
+  @Input() onSubmit: (values: any) => void;
+  @Input() settings: ISettings;
 
-  onSubmit(values: any) {
-    console.log('====================================');
-    console.log(values);
-    console.log('====================================');
+  constructor() {
 
   }
 
   ngOnInit() {
-    console.log('dynamicForm:', this.dynamicForm);
-
+    console.log('====================================');
+    console.log(this.settings);
+    console.log('====================================');
   }
 
 }

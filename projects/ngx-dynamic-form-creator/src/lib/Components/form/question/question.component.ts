@@ -4,6 +4,7 @@ import { FormItem } from '../../../Models/interfaces/formItem.interface';
 import { DynamicForm } from '../../../Models/interfaces/dynamicForm.interface';
 import { Dependence } from '../../../Models/interfaces/dependence.interface';
 import { ItemOption } from '../../../Models/interfaces/itemOption.interface';
+import { ISettings } from '../../../ngx-dynamic-form-creator.component';
 
 @Component({
   selector: 'app-question',
@@ -19,6 +20,7 @@ export class QuestionComponent implements OnInit {
   @Input() dependenciesStatuses: any;
   @Input() dynamicForm: DynamicForm;
   @Input() updateStepValidation: () => void;
+  @Input() settings: ISettings;
   // tslint:disable-next-line: no-input-rename
   @Input('formControlNameIndex') FormControlName: number;
   isTrue: boolean;
@@ -28,6 +30,9 @@ export class QuestionComponent implements OnInit {
 
   ngOnInit() {
     this.initDependencies();
+    console.log('====================================');
+    console.log(this.settings.formFieldClassName);
+    console.log('====================================');
   }
 
   initDependencies() {

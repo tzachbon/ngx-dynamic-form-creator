@@ -1,5 +1,5 @@
-import { DynamicForm } from './Models/interfaces/dynamicForm.interface';
 
+import { DynamicForm } from '../../dist/ngx-dynamic-form-creator/lib/Models/interfaces/dynamicForm.interface.d';
 
 const x = {
   "formName": "טופס דמו",

@@ -5,6 +5,9 @@ import { FullForm } from '../../Models/interfaces/fullForm.interface';
 import { FormItem } from '../../Models/interfaces/formItem.interface';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material';
+import { ISettings } from '../../ngx-dynamic-form-creator.component';
+
+
 
 
 @Component({
@@ -15,6 +18,7 @@ import { MatStepper } from '@angular/material';
 export class FormComponent implements OnInit {
   @Input() dynamicForm: DynamicForm;
   @Input() onSubmit: (values: any) => void;
+  @Input() settings: ISettings;
   @ViewChild('stepper', { static: true }) stepperRef: MatStepper;
   public form: FormGroup;
   public dependenciesStatuses = {};
@@ -26,9 +30,6 @@ export class FormComponent implements OnInit {
   ngOnInit() {
     this.form = this.createFormGroup(this.dynamicForm);
     this.stepsValidation = this.getStepsValidation();
-    console.log('====================================');
-    console.log(this.stepsValidation);
-    console.log('====================================');
   }
 
   stepHasChanged(event: StepperSelectionEvent) {
@@ -39,9 +40,6 @@ export class FormComponent implements OnInit {
 
   updateStepValidation() {
     this.stepsValidation = this.getStepsValidation();
-    console.log('====================================');
-    console.log(this.stepperRef, this.stepsValidation);
-    console.log('====================================');
   }
 
   getStepsValidation() {

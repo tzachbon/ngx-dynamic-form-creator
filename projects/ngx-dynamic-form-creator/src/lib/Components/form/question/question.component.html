@@ -5,6 +5,7 @@
         dependenciesStatuses[question.key] === undefined ||
         dependenciesStatuses[question.key]
       "
+      [ngClass]="settings.formFieldClassName"
     >
       <mat-form-field *ngSwitchCase="'email'">
         <input
