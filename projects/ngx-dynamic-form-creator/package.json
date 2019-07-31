@@ -1,8 +1,25 @@
 {
   "name": "ngx-dynamic-form-creator",
-  "version": "0.0.2",
+  "version": "",
+  "author": {
+    "name": "Tzach Bonfil",
+    "email": "tzachbonfil@gmail.com"
+  },
   "peerDependencies": {
     "@angular/common": "^8.0.3",
-    "@angular/core": "^8.0.3"
-  }
+    "@angular/core": "^8.0.3",
+    "@angular/animations": "^8.0.3",
+    "@angular/cdk": "^8.1.1",
+    "@angular/forms": "~8.0.3",
+    "@angular/material": "^8.1.1",
+    "@angular/platform-browser": "~8.0.3",
+    "@angular/platform-browser-dynamic": "~8.0.3",
+    "hammerjs": "^2.0.8"
+  },
+  "licenses": [
+    {
+      "type": "ISC",
+      "url": "https://opensource.org/licenses/ISC"
+    }
+  ]
 }
