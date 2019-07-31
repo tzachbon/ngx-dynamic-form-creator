@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
   public form: FormGroup;
   public dependenciesStatuses = {};
   public stepsValidation = {};
-  public visitedSteps = [];
+  public visitedSteps = [0];
 
   constructor() { }
 
@@ -71,7 +71,23 @@ export class FormComponent implements OnInit {
   }
 
   onSubmitHandler() {
-    this.onSubmit(this.form.value);
+    const values = {};
+    Object.keys(this.form.value).forEach(stepName => {
+      const tempStepValues = {};
+      const form = this.dynamicForm.FullForm.find(dForm => dForm.step.stepName === stepName);
+      form.items.forEach((item, i) => {
+        let value: string = this.form.value[stepName][i];
+        if (value !== '') {
+          if (item.options.length > 0) {
+            const valueFromKey = item.options.find(option => option.key === value).value;
+            value = valueFromKey;
+          }
+          tempStepValues[item.key] = value;
+        }
+      });
+      values[stepName] = tempStepValues;
+    });
+    this.onSubmit(values);
   }
 
   createFormGroup(dynamicForm: DynamicForm): FormGroup {

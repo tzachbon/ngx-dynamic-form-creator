@@ -1,4 +1,8 @@
-<div [formGroup]="formArray" *ngIf="dependenciesStatuses[question.key]">
+<div
+  [formGroup]="formArray"
+  *ngIf="dependenciesStatuses[question.key]"
+  [dir]="settings.dir"
+>
   <div [ngSwitch]="question.type">
     <div
       *ngIf="

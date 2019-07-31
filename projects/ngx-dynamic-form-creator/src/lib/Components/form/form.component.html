@@ -6,7 +6,7 @@
     [ngClass]="settings.stepperClassName"
   >
     <mat-horizontal-stepper
-      [linear]="false"
+      [linear]="true"
       labelPosition="bottom"
       #stepper
       (selectionChange)="stepHasChanged($event)"
@@ -14,7 +14,7 @@
       <mat-step
         *ngFor="let step of getFormStepNamesArray(); let i = index"
         [completed]="form.controls[step].valid"
-        [stepControl]="step"
+        [stepControl]="form.controls[step]"
         [hasError]="form.controls[step].invalid"
       >
         <ng-template matStepLabel>{{ step }}</ng-template>
